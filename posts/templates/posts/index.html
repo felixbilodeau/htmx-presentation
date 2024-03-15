@@ -2,18 +2,23 @@
 {% block content %}
     <h1>Posts</h1>
     <h3><a href="{% url "base:home" %}">Home</a></h3>
-    {% if posts.exists %}
-        {% for post in posts %}
-            <div class="post">
-                <div class="post--header">
-                    Posted: {{ post.created }}{% if post.edited %} <em>(edited)</em>{% endif %}
-                </div>
-                <div class="post--content">
-                    {{ post.content }}
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <em>There are no posts to show at this time</em>
-    {% endif %}
+    <div class="post--create">
+        <button
+            hx-get="{% url "posts:create" %}"
+            hx-target="next .post--list"
+            hx-swap="afterbegin"
+        >
+            Add New Post
+        </button>
+    </div>
+    <div
+        class="post--list"
+        hx-post="{% url "posts:list" %}"
+        hx-trigger="load, every 5s"
+        hx-include="this"
+        hx-swap="afterbegin"
+        hx-disinherit="hx-include"
+    >
+        {% csrf_token %}
+    </div>
 {% endblock %}

@@ -1,0 +1,15 @@
+<form hx-post="{{ request.path }}" hx-swap="outerHTML" hx-target="closest .post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button type="submit">Submit</button>
+    <button
+        hx-get="{% url "posts:post" pk=form.instance.pk %}"
+        hx-swap="outerHTML"
+        hx-target="closest .post"
+        type="button"
+    >
+        Cancel
+    </button>
+</form>

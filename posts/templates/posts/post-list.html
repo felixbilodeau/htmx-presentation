@@ -1,0 +1,4 @@
+{% csrf_token %}
+{% for post in posts %}
+    {% include "posts/post.html" with post=post %}
+{% endfor %}

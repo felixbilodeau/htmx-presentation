@@ -1,0 +1,18 @@
+<div class="post">
+    <input type="hidden" name="{{ post.pk }}">
+    <div class="post--wrapper">
+        <div class="post--header">
+            Posted: {{ post.created }}{% if post.edited %} <em>(edited)</em>{% endif %}
+        </div>
+        <div class="post--content">
+            {{ post.content }}
+        </div>
+        <button
+            hx-get="{% url "posts:update" pk=post.pk %}"
+            hx-target="closest .post--wrapper"
+            hx-swap="outerHTML"
+        >
+            Edit
+        </button>
+    </div>
+</div>
