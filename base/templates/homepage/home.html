@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Welcome to HTMX!!</h1>
+    {% for label, url in homepage_urls.items %}
+        <h3><a href="{{ url }}">{{ label }}</a></h3>
+    {% endfor %}
+{% endblock %}
